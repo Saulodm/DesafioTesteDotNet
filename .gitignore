@@ -1,0 +1,60 @@
+# Visual Studio / .NET (.gitignore minimal para Windows Forms)
+# Ignora apenas arquivos gerados, caches e configurações locais que NÃO devem entrar no repositório.
+
+# Build output
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio workspace / user-specific files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider / Resharper (se alguém usar)
+_ReSharper*/
+*.DotSettings.user
+
+# NuGet / pacotes
+packages/
+*.nupkg
+.nuget/packages/
+
+# Publish / artifacts
+publish/
+artifacts/
+
+# Temporary files, logs e caches
+*.log
+*.tmp
+*.temp
+*.cache
+
+# VS Code settings (opcional)
+.vscode/
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Ignore Visual Studio Code workspace storage
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+
+# Optional: se usar arquivos binários grandes / DB locais
+*.mdf
+*.ldf
+*.sqlite
+*.db
+
+# NOTA: mantenha no repositório os arquivos de código e projeto:
+# - *.sln
+# - *.csproj / *.vbproj
+# - *.cs, *.vb
+# - *.Designer.cs (arquivos de designer do Windows Forms)
+# - *.resx (recursos)
+# - App.config / web.config
