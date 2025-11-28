@@ -87,9 +87,9 @@ namespace Core.ViewModels
             OnPropertyChanged(nameof(Categories));
         }
 
-        private void LoadProduct(Guid id)
+        private async Task LoadProduct(Guid id)
         {
-            var product = _service.GetById(id);
+            var product = await _service.GetById(id);
             Id = id;
             Name = product.Name;
             Price = product.Price;

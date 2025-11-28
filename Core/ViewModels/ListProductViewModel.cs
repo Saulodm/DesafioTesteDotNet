@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
 using Core.Collections;
 using Core.Interfaces;
@@ -37,14 +38,14 @@ namespace Core.ViewModels
             Load();
         }
 
-        public void Load()
+        public async Task Load()
         {
             // Suspende notificações para evitar InvalidOperationException se a UI estiver em edição
             Products.SuspendListChangedNotification();
             try
             {
                 Products.Clear();
-                foreach (var p in _service.GetAll().OrderByDescending(x => x.Name))
+                foreach (var p in await _service.GetAll())
                     Products.Add(p);
             }
             finally

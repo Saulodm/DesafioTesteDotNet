@@ -1,5 +1,6 @@
 ﻿using Aplication.Services;
 using Core.Interfaces;
+using Core.Models;
 using Core.ViewModels;
 using DesafioDotNet.Navigation;
 using Infrastructure.Data;
@@ -25,7 +26,7 @@ namespace DesafioDotNet
             services.AddTransient<AddProductForm>();
 
             // Infrastructure
-            services.AddSingleton<IProductRepository, ProductRepository>();
+            services.AddSingleton<IRepository<Product>, ProductRepository>();
 
             // Services / Application
             services.AddSingleton<IProductService, ProductService>();

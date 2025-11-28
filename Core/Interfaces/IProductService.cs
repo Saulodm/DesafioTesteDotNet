@@ -5,12 +5,12 @@ namespace Core.Interfaces
 {
     public interface IProductService
     {
-        IEnumerable<Product> GetAll();
+        Task<IEnumerable<Product>> GetAll();
         IEnumerable<string> GetCategories();
-        void Add(string name, decimal price, string category, int stockQauntity);
-        void Remove(Guid id);
-        Product GetById(Guid id);
-        void Update(string name, decimal price, string category, int stockQauntity);
+        Task Add(string name, decimal price, string category, int stockQauntity);
+        Task Remove(Guid id);
+        Task<Product> GetById(Guid id);
+        Task Update(string name, decimal price, string category, int stockQauntity);
         void SetInMemoryProductNull();
     }
 }

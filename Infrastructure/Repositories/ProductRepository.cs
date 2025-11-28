@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
-    public class ProductRepository : IProductRepository
+    public class ProductRepository : IRepository<Product>
     {
 
         private readonly AppDbContext _dbContext;
@@ -14,25 +14,16 @@ namespace Infrastructure.Repositories
         {
             _dbContext = factory.CreateDbContext();
         }
-        public void Add(Product item)
+    
+        public async Task AddAsync(Product entity)
         {
-            if (item == null) throw new ArgumentNullException(nameof(item));
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
 
-            _dbContext.Products.Add(item);
+            _dbContext.Products.Add(entity);
             _dbContext.SaveChanges();
         }
 
-        public IEnumerable<Product> GetAll()
-        {
-            return _dbContext.Products.AsNoTracking().ToList();
-        }
-
-        public Product GetById(Guid id)
-        {
-            return _dbContext.Products.Where(c => c.Id == id).FirstOrDefault();
-        }
-
-        public void Remove(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
             var e = _dbContext.Products.Find(id);
             if (e != null)
@@ -42,10 +33,23 @@ namespace Infrastructure.Repositories
             }
         }
 
-        public void Update(Product item)
+      
+        public async Task<IEnumerable<Product>> GetAllAsync()
         {
-            if (item == null) throw new ArgumentNullException(nameof(item));
-            _dbContext.Products.Update(item);
+            return _dbContext.Products.AsNoTracking().ToList();
+        }
+
+
+        public async Task<Product> GetByIdAsync(Guid id)
+        {
+            return _dbContext.Products.Where(c => c.Id == id).FirstOrDefault();
+        }
+
+   
+        public async Task UpdateAsync(Product entity)
+        {
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
+            _dbContext.Products.Update(entity);
             _dbContext.SaveChanges();
         }
     }
