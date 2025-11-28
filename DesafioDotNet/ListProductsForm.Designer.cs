@@ -29,5 +29,6 @@
 
         #endregion
         private Label Title;
+        private Button ExportButton;
     }
 }

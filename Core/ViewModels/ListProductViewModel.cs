@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using Core.Collections;
 using Core.Interfaces;
 using Core.Models;
@@ -13,6 +10,7 @@ namespace Core.ViewModels
         private readonly IProductService _service;
 
         private readonly INavigationService _navigation;
+        private readonly IProductExportService _exportService;
 
         public BindingListSafe<Product> Products { get; } = new BindingListSafe<Product>();
 
@@ -27,13 +25,16 @@ namespace Core.ViewModels
         public RelayCommand RemoveCommand { get; }
         public RelayCommand EditCommand { get; }
 
-        public ListProductViewModel(IProductService service, INavigationService navigation)
+        public ListProductViewModel(IProductService service, INavigationService navigation, IProductExportService exportService)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
             _navigation = navigation ?? throw new ArgumentNullException(nameof(navigation));
+            _exportService = exportService ?? throw new ArgumentNullException(nameof(exportService));
             AddCommand = new RelayCommand(() => NavigateAdd());
             RemoveCommand = new RelayCommand(() => Remove(), () => Selected != null);
             EditCommand = new RelayCommand(() => Edit(), () => Selected != null);
+
+
 
             Load();
         }
@@ -65,7 +66,7 @@ namespace Core.ViewModels
                 Load();
         }
 
-       
+
 
         private void Remove()
         {
